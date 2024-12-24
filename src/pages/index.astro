@@ -2,6 +2,8 @@
 import Navigation from "../components/Navigation.vue";
 import Layout from "../layouts/Layout.astro";
 import siteConfig from "../../site-config";
+import heroImage from "../assets/hero.png";
+import { Image } from "astro:assets";
 
 const currentYear = new Date().getFullYear();
 ---
@@ -13,9 +15,22 @@ const currentYear = new Date().getFullYear();
 		<main class="container mx-auto px-4 mt-6 mb-20">
 			<!-- Hero Section -->
 			<section
-				class="hero h-[calc(100vh-8rem)] bg-base-200 rounded-box mt-4"
+				class="hero h-[calc(100vh-8rem)] rounded-box mt-4 relative overflow-hidden"
 			>
-				<div class="hero-content text-center">
+				<Image
+					src={heroImage}
+					alt="Hero background"
+					width={1920}
+					height={1080}
+					class="absolute inset-0 w-full h-full object-cover"
+				/>
+				<div
+					class="hero-overlay bg-opacity-70 bg-base-300 absolute inset-0"
+				>
+				</div>
+				<div
+					class="hero-content text-center relative z-10 text-base-content"
+				>
 					<div class="max-w-lg">
 						<h1 class="text-5xl font-bold">
 							Welcome to {siteConfig.companyName}
