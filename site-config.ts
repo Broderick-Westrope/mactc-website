@@ -55,7 +55,8 @@ export const siteConfig = {
     ],
     contact: {
         phone: '0411 152 309',
-        address: '4 Chamberlain Street, Campbelltown, NSW, 2570'
+        address: '4 Chamberlain Street, Campbelltown, NSW, 2570',
+        facebook: 'https://www.facebook.com/macarthurtuitioncentre/',
     }
 }
 
