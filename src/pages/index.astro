@@ -1,11 +1,160 @@
 ---
-import Welcome from "../components/Welcome.astro";
+import Navigation from "../components/Navigation.vue";
 import Layout from "../layouts/Layout.astro";
+import siteConfig from "../../site-config";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const currentYear = new Date().getFullYear();
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Your Business Name">
+	<div class="min-h-screen bg-base-100">
+		<Navigation client:load />
+
+		<main class="container mx-auto px-4 mt-6 mb-20">
+			<!-- Hero Section -->
+			<section
+				class="hero h-[calc(100vh-8rem)] bg-base-200 rounded-box mt-4"
+			>
+				<div class="hero-content text-center">
+					<div class="max-w-lg">
+						<h1 class="text-5xl font-bold">
+							Welcome to {siteConfig.companyName}
+						</h1>
+						<p class="py-6 text-2xl">
+							{siteConfig.tagline}
+						</p>
+						<a href="#about" class="btn btn-primary">Learn More</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- About Section -->
+			<section id="about" class="my-20">
+				<div class="card bg-base-200 shadow-xl">
+					<div class="card-body">
+						<h2 class="text-3xl font-bold mb-6">About Us</h2>
+						{
+							siteConfig.about.map((paragraph) => (
+								<p class="text-lg">{paragraph}</p>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<!-- Services Section -->
+			<section id="services" class="my-20">
+				<h2 class="text-3xl font-bold mb-6">Our Services</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+					{
+						siteConfig.services.map((service) => (
+							<div class="card bg-base-200 shadow-xl">
+								<div class="card-body">
+									<h3 class="card-title">{service.title}</h3>
+									<ul class="list-disc list-inside">
+										{service.points.map((point) => (
+											<li>{point}</li>
+										))}
+									</ul>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Fees Section -->
+			<section id="fees" class="my-20">
+				<h2 class="text-3xl font-bold mb-6">Our Fees</h2>
+				<div
+					class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 place-items-center"
+				>
+					{
+						siteConfig.fees.map((fee) => (
+							<div class="card bg-base-200 shadow-xl">
+								<div class="card-body">
+									<span class="text-2xl">
+										{fee.title}: {fee.amount}
+									</span>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section id="contact" class="my-20">
+				<div class="card bg-base-200 shadow-xl">
+					<div class="card-body">
+						<div
+							class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start"
+						>
+							<div class="flex flex-col gap-6">
+								<h2 class="text-3xl font-bold">Contact Us</h2>
+								<p>
+									Please get in touch using these details or
+									visit us at our office during business
+									hours.
+								</p>
+								<a href={"tel:" + siteConfig.contact.phone}>
+									📞 <span class="link">
+										{siteConfig.contact.phone}
+									</span>
+								</a>
+								<a
+									href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.contact.address)}`}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									📍 <span class="link">
+										{siteConfig.contact.address}
+									</span>
+								</a>
+							</div>
+							<div>
+								<form class="space-y-4">
+									<div class="form-control">
+										<input
+											type="text"
+											placeholder="Name"
+											class="input input-bordered"
+										/>
+									</div>
+									<div class="form-control">
+										<input
+											type="email"
+											placeholder="Email"
+											class="input input-bordered"
+										/>
+									</div>
+									<div class="form-control">
+										<textarea
+											class="textarea textarea-bordered"
+											placeholder="Message"></textarea>
+									</div>
+									<button class="btn btn-primary"
+										>Send Message</button
+									>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer -->
+		<footer
+			class="footer footer-center p-10 bg-base-200 text-base-content rounded"
+		>
+			<div>
+				<p>
+					Copyright © {currentYear} - All rights reserved by {
+						siteConfig.companyName
+					}
+				</p>
+			</div>
+		</footer>
+	</div>
 </Layout>
