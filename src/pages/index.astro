@@ -8,7 +8,7 @@ import { Image } from "astro:assets";
 const currentYear = new Date().getFullYear();
 ---
 
-<Layout title="Your Business Name">
+<Layout title={siteConfig.companyName}>
 	<div class="min-h-screen bg-base-100">
 		<Navigation client:load />
 
